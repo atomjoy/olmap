@@ -1,4 +1,6 @@
-# OpenLayers Map Marker Popup
+# Map marker with popup using OpenLayers
+
+How to create a simple map with a marker using OpenLayers maps.
 
 ## Run
 
