@@ -19,3 +19,7 @@ npm run build
 ## To get started
 
 <https://openlayers.org/doc/quickstart.html>
+
+## Image
+
+<img src="https://raw.githubusercontent.com/atomjoy/olmap/main/map.png" width="100%"/>
