@@ -22,7 +22,7 @@ npm run build
 
 ## How to start
 
--<https://openlayers.org/doc/quickstart.html>
+- <https://openlayers.org/doc/quickstart.html>
 - <https://openlayers.org/en/latest/apidoc/module-ol_View-View.html>
 - <https://openlayers.org/en/latest/examples/modify-icon.html>
 - <https://openlayers.org/en/latest/examples/popup.html>
