@@ -1,0 +1,78 @@
+@import "node_modules/ol/ol.css";
+
+body {
+  margin: 0px;
+  padding: 5vh;
+  height: 100%;
+}
+
+#map {
+  float: left;
+  width: 100%;
+  height: 90vh;
+}
+
+#olpopup {
+  background: #fff;
+  border-radius: 10px;
+  padding: 5px;
+  z-index: 999999;
+}
+:root {
+  --popup-width: 260px;
+}
+
+.ol-popup-closer {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 20px;
+  height: 20px;
+  color: #fff;
+  background: #333;
+  line-height: 17px;
+  text-align: center;
+  border-radius: 5px;
+  font-family: 'consolas';
+  cursor: pointer;
+}
+
+.ol-popup { 
+  font-family: sans-serif;
+  font-size: 14px;
+  position: absolute;
+  background-color: white;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  border: 1px solid #f3f3f3;
+  bottom: 12px;
+  width: var(--popup-width);
+  transform: translate(-50%, 0%);
+  filter: drop-shadow(0 1px 4px rgba(0,0,0,0.3));
+  padding: 20px !important;
+  padding-top: 50px !important;
+}
+
+.ol-popup:after, .ol-popup:before {
+  top: 100%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+}
+
+.ol-popup:after {
+  border-top-color: white;
+  border-width: 10px;
+  left: calc(var(--popup-width) / 2 + 10px);
+  /* margin-left: -16px; */
+}
+
+.ol-popup:before {
+  border-top-color: #cccccc2a;
+  border-width: 11px;
+  left: calc(var(--popup-width) / 2 + 10px);
+  /* margin-left: -16px; */
+}
