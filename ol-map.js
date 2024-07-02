@@ -6,22 +6,34 @@ import Point from 'ol/geom/Point.js';
 import {Icon, Style} from 'ol/style.js';
 import { Vector as VectorSource } from 'ol/source.js';
 import { Tile as TileLayer, Vector as VectorLayer, Image as ImageLayer } from 'ol/layer.js';
-import { fromLonLat } from 'ol/proj.js';
-import { toLonLat } from 'ol/proj.js';
+import { toLonLat, fromLonLat } from 'ol/proj.js';
 import { toStringHDMS } from 'ol/coordinate.js';
 
 // Settings
-const zoom = 16;
-const point = [21.00192, 52.22774]; // LonLat
+const zoom = 15;
+const point = [21.00192, 52.22774]; // Center map
 const lonlat = fromLonLat(point)
+const features = []
 
-// Marker
-const icon = new Feature({  
-  geometry: new Point(lonlat),
-  name: 'Warsaw',
-  population: 1760000,
-});
+// Add markers
+const locations = [
+  {
+    name: 'Drink Bar',
+    street: 'Złota 44',
+    city: '01-100 Warsaw',
+    image: 'https://images.pexels.com/photos/11468998/pexels-photo-11468998.jpeg',
+    point: [21.00192, 52.22774]
+  },
+  {
+    name: 'Pool Bar',
+    street: 'Piękna 14',
+    city: '02-100 Warsaw',
+    image: 'https://images.pexels.com/photos/261043/pexels-photo-261043.jpeg',
+    point: [20.99000, 52.23074]
+  }
+]
 
+// Icon style
 const iconStyle = new Style({
   image: new Icon({
     anchor: [0.5, 46],
@@ -31,10 +43,24 @@ const iconStyle = new Style({
   }),
 });
 
-icon.setStyle(iconStyle);
+// Markers
+locations.forEach((i) => {
+  // Create marker
+  const icon = new Feature({  
+    geometry: new Point(fromLonLat(i.point)),
+    name: i.name,
+    city: i.city,
+    street: i.street,
+    image: i.image
+  })
+  // Add style
+  icon.setStyle(iconStyle)
+  // Add to array
+  features.push(icon)
+})
 
-const vectorSource = new VectorSource({
-  features: [icon],
+const vectorSource = new VectorSource({  
+  features: features,
 });
 
 const vectorLayer = new VectorLayer({
@@ -91,9 +117,11 @@ map.on('singleclick', function (evt) {
   if (feature) {
     const coord = feature.getGeometry().getCoordinates();
     content.innerHTML =
-      '<div><strong>Location:</strong> ' + toStringHDMS(toLonLat(coord)) + '</div>' +
-      '<div><strong>Place:</strong> ' + feature.get('name') + '</div>' +
-      '<div><strong>Population:</strong> ' + feature.get('population') + '</div>'    
+    '<div><img src="' + feature.get('image') + '"/></div>' +
+    '<h2>' + feature.get('name') + '</h2>' +
+    '<div><strong>City:</strong> ' + feature.get('city') + '</div>' +    
+    '<div><strong>Address:</strong> ' + feature.get('street') + '</div>' +
+    '<div><strong>Location:</strong> ' + toStringHDMS(toLonLat(coord)) + '</div>'
     overlay.setPosition(coord);    
   } else {
     overlay.setPosition(undefined);
